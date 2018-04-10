@@ -5,7 +5,7 @@ services:
   mailslurper:
     image: gabel/mailslurper
     ports:
-      - 2500:2500
+      - 25:25
       - 9000:8080
       - 8085:8085
     environment:
