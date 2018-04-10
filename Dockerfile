@@ -1,10 +1,21 @@
-FROM ubuntu:17.04
-MAINTAINER Marco Pas "marco.pasopas@gmail.com"
+FROM ubuntu:16.04
+MAINTAINER Martin Fischer "gabeldeluxe@gmail.com"
 
-RUN mkdir /opt/mailslurper
+ENV MAILSLURPER_VERSION 1.13.1
 
-COPY ./mailslurper /opt/mailslurper
+RUN useradd mailslurper && \
+    mkdir -p /opt/mailslurper
+
+ADD https://github.com/mailslurper/mailslurper/releases/download/${MAILSLURPER_VERSION}/mailslurper-${MAILSLURPER_VERSION}-linux.zip /opt/mailslurper/mailslurper.zip
 
 WORKDIR /opt/mailslurper
+
+RUN apt-get update && apt-get install -y unzip && unzip /opt/mailslurper/mailslurper.zip && \
+  chown -R mailslurper:mailslurper /opt/mailslurper && \
+  sed -i -e 's/localhost/0.0.0.0/g' config.json && \
+  rm /opt/mailslurper/mailslurper.zip && \
+  rm -rf /var/lib/apt/lists/*
+
+USER mailslurper
 
 ENTRYPOINT ["/opt/mailslurper/mailslurper"]

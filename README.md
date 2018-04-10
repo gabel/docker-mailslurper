@@ -1,6 +1,8 @@
 # docker-mailslurper
 
-Docker image using MailSlurper which is a handy SMTP mail server useful for local and team application development. You can use this image to send mail to a SMTP host and MailSlurper provides the SMTP server and visual UI. For more information on MailSlurper please see [MailSlurper](http://http://mailslurper.com/).
+Docker image using MailSlurper which is a handy SMTP mail server useful for local and team application development. 
+You can use this image to send mail to a SMTP host and MailSlurper provides the SMTP server and visual UI. 
+For more information on MailSlurper please see [MailSlurper](http://http://mailslurper.com/).
 
 ### Building the image
 `docker build -t docker-mailslurper .`
@@ -36,7 +38,12 @@ Example custom config file `custom-config.json`:
 Run the image using: `docker run -v $PWD/custom-config.json:/opt/mailslurper/config.json -p 2500:2500 -p 8080:8080 -p 8085:8085 marcopas/docker-mailslurper`
 
 ### Using Docker Compose
-There is an assumption you have installed docker-compose!
+
+If you have docker-compose installed use it to run it and configure MailSlurper version. See `docker-compose.yml` for
+details
 
 `docker-compose up`
 
+### Credits
+
+Thanks @rattermeyer, @mpas for the base to this version.
